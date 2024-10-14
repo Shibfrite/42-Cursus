@@ -6,11 +6,35 @@
 /*   By: makurek <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 18:56:51 by makurek           #+#    #+#             */
-/*   Updated: 2024/10/12 18:57:35 by makurek          ###   ########.fr       */
+/*   Updated: 2024/10/14 19:04:36 by makurek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+static int	handle_format_specifier(const char *format, va_list args)
+{
+	int	count;
+
+	count = 0;
+	if (*format == 'd' || *format == 'i')
+		count += print_dec(va_arg(args, int), 1);
+	else if (*format == 's')
+		count += print_str(va_arg(args, char *));
+	else if (*format == 'p')
+		count += print_addr(va_arg(args, void *));
+	else if (*format == 'x')
+		count += print_hex(va_arg(args, unsigned int), 0);
+	else if (*format == 'X')
+		count += print_hex(va_arg(args, unsigned int), 1);
+	else if (*format == 'u')
+		count += print_dec(va_arg(args, unsigned int), 0);
+	else if (*format == 'c')
+		count += print_char((char)va_arg(args, int));
+	else if (*format == '%')
+		count += print_char('%');
+	return (count);
+}
 
 int	ft_printf(const char *format, ...)
 {
@@ -24,26 +48,10 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			if (*format == 'd' || *format == 'i')
-				ft_putnbr(va_arg(args, int));
-			else if (*format == 's')
-				ft_putstr(va_arg(args, char *));
-			else if (*format == 'p')
-				ft_putaddr(va_arg(args, void *));
-			else if (*format == 'x')
-				ft_puthex(va_arg(args, unsigned int), 0);
-			else if (*format == 'X')
-				ft_puthex(va_arg(args, unsigned int), 1);
-			else if (*format == 'u')
-				ft_putnbr_unsigned(va_arg(args, unsigned int));
-			else if (*format == 'c')
-				ft_putchar(va_arg(args, int));
-			else if (*format == '%')
-				ft_putchar('%');
+			count += handle_format_specifier(format, args);
 		}
 		else
-			ft_putchar(*format);
-		count++;
+			count += print_char(*format);
 		format++;
 	}
 	va_end(args);

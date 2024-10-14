@@ -6,7 +6,7 @@
 /*   By: makurek <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:23:28 by makurek           #+#    #+#             */
-/*   Updated: 2024/10/12 19:00:08 by makurek          ###   ########.fr       */
+/*   Updated: 2024/10/14 18:21:45 by makurek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
+# include <limits.h>
 
 typedef struct s_list
 {
@@ -68,6 +69,12 @@ void	ft_putnbr(int n);
 void	ft_putstr(char *s);
 void	ft_puthex(unsigned int n, int uppercase);
 void	ft_putnbr_unsigned(unsigned int n);
+int		print_int(unsigned long n, const char *base, int is_signed);
+int		print_hex(unsigned long n, int uppercase);
+int		print_char(char c);
+int		print_str(const char *str);
+int		print_addr(void *ptr);
+int		print_dec(long n, int is_signed);
 
 int		ft_lstsize(t_list *lst);
 t_list	*ft_lstnew(void *content);
