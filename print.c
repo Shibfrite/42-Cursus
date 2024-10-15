@@ -6,11 +6,11 @@
 /*   By: makurek <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 18:23:36 by makurek           #+#    #+#             */
-/*   Updated: 2024/10/14 18:32:07 by makurek          ###   ########.fr       */
+/*   Updated: 2024/10/15 14:48:23 by makurek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
 static int	show_with_buffer(unsigned long n, const char *base)
 {
@@ -63,8 +63,8 @@ int	print_int(unsigned long n, const char *base, int is_signed)
 	if (is_signed)
 	{
 		negative = handle_signed((long)n);
-		if (negative == 11)
-			return (11);
+		if (negative == 20)
+			return (20);
 		else if (negative)
 			n = -n;
 	}
