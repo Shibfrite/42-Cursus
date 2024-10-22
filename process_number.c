@@ -6,7 +6,7 @@
 /*   By: makurek <marvin@42.fr>					 +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2024/10/18 17:51:27 by makurek		   #+#	#+#			 */
-/*   Updated: 2024/10/21 18:36:06 by makurek          ###   ########.fr       */
+/*   Updated: 2024/10/22 17:46:47 by makurek          ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void
 	int	base_len;
 
 	base_len = ft_strlen(base);
-	while (n > 0 && *i > 0)
+	while (n && *i)
 	{
 		buffer[--(*i)] = base[n % base_len];
 		n /= base_len;
@@ -34,17 +34,17 @@ static int	init_and_convert(char *buffer, long n,
 	ft_memset(buffer, 0, BUFFER_SIZE);
 	un = n;
 	if (n < 0 && ft_strchr("di", fmt->specifier))
-	{
 		un = -n;
-		fmt->negative = 1;
-	}
 	i = BUFFER_SIZE - 1;
 	buffer[i] = '\0';
+	if (fmt->minus)
+		while (fmt->width-- && i)
+			buffer[--i] = ' ';
 	if (un == 0 && fmt->precision != 0)
 		buffer[--i] = '0';
 	else
 		convert_number(buffer, un, base, &i);
-	while (fmt->precision > BUFFER_SIZE - 1 - i && i > 0)
+	while (fmt->precision > BUFFER_SIZE - 1 - i && i)
 		buffer[--i] = '0';
 	return (i);
 }
@@ -80,35 +80,19 @@ static void	apply_flags(char *buffer, unsigned long n, t_format *fmt, int *i)
 		pad = '0' ;
 	else
 		pad = ' ';
-	while (fmt->width > 0 && *i > 0 && !fmt->minus)
-	{
-		buffer[--(*i)] = pad;
-		fmt->width--;
-	}
+	if (!fmt->minus)
+		while (fmt->width-- && *i)
+			buffer[--(*i)] = pad;
 }
 
 int	process_number(unsigned long n, const char *base, t_format *fmt)
 {
 	char	buffer[BUFFER_SIZE];
 	int		i;
-	int		len;
 
 	if (fmt->specifier == 'p' && n == 0)
 		return (write(1, "(nil)", 5));
 	i = init_and_convert(buffer, n, base, fmt);
 	apply_flags(buffer, n, fmt, &i);
-	len = BUFFER_SIZE - 1 - i;
-	if (fmt->minus)
-	{
-		write(1, &buffer[i], len);
-		while (fmt->width > 0)
-		{
-			write(1, " ", 1);
-			fmt->width--;
-			len++;
-		}
-	}
-	else
-		write(1, &buffer[i], len);
-	return (len);
+	return(write(1, &buffer[i], BUFFER_SIZE - 1 - i));
 }

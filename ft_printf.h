@@ -6,7 +6,7 @@
 /*   By: makurek <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 17:42:04 by makurek           #+#    #+#             */
-/*   Updated: 2024/10/21 17:52:39 by makurek          ###   ########.fr       */
+/*   Updated: 2024/10/22 17:31:39 by makurek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int		print_char(char c);
 int		print_str(const char *str);
 int		print_addr(void *ptr);
 int		print_dec(long n, int is_signed);
-int		ft_numlen(unsigned long n, int base);
+int		ft_numlen(unsigned long long n, int base);
 
 int		process_number(unsigned long n, const char *base, t_format *fmt);
 int		process_string(const char *str, t_format *fmt);

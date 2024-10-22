@@ -6,7 +6,7 @@
 /*   By: makurek <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:08:12 by makurek           #+#    #+#             */
-/*   Updated: 2024/10/21 16:42:00 by makurek          ###   ########.fr       */
+/*   Updated: 2024/10/22 18:21:59 by makurek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	process_string(const char *str, t_format *fmt)
 	ft_memcpy(&buffer[i], str, len);
 	i += len;
 	if (fmt->minus)
-		while (fmt->width-- > 0)
+		while (fmt->width--)
 			buffer[i++] = ' ';
 	return (write(1, buffer, i));
 }

@@ -6,7 +6,7 @@
 /*   By: makurek <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 18:23:36 by makurek           #+#    #+#             */
-/*   Updated: 2024/10/21 16:30:17 by makurek          ###   ########.fr       */
+/*   Updated: 2024/10/22 18:37:12 by makurek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	process_format(t_format *fmt, va_list args)
 {
 	const char	*base;
 	const char	*str;
-	char		c;
+	int	c;
 
 	if (ft_strchr("dixXup", fmt->specifier))
 	{
@@ -42,18 +42,21 @@ int	process_format(t_format *fmt, va_list args)
 		return (process_number(get_arg_value(args, fmt->specifier), base, fmt));
 	}
 	else if (fmt->specifier == 's')
-	{
-		str = va_arg(args, const char *);
-		if (str == NULL)
-			str = "(null)";
-		return (process_string(str, fmt));
-	}
-	else if (fmt->specifier == 'c')
-	{
-		c = (char)va_arg(args, int);
-		return (write(1, &c, 1));
-	}
-	else if (fmt->specifier == '%')
-		return (write(1, "%", 1));
-	return (0);
-}
+    {
+        str = va_arg(args, char *);
+        if (str == NULL)
+            str = "(null)";
+    }
+    else if (fmt->specifier == 'c')
+    {
+        c = va_arg(args, int);
+        return process_char((unsigned char)c, fmt);
+    }
+    else if (fmt->specifier == '%')
+    {
+        str = "%";
+    }
+    else
+        return (0);
+    return (process_string(str, fmt));
+}	
