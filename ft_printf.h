@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                            :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makurek <marvin@42lausanne.ch>             +#+  +:+       +#+        */
+/*   By: makurek <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/08 14:23:28 by makurek           #+#    #+#             */
-/*   Updated: 2024/10/14 18:21:45 by makurek          ###   ########.fr       */
+/*   Created: 2024/10/16 17:42:04 by makurek           #+#    #+#             */
+/*   Updated: 2024/10/21 17:52:39 by makurek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
 # include <stddef.h>
 # include <string.h>
@@ -19,12 +19,28 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include <limits.h>
+# include <stdarg.h>
+# include <stdio.h>
+
+# define BUFFER_SIZE 2048
 
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }	t_list;
+
+typedef struct s_format {
+	int		minus;
+	int		zero;
+	int		hash;
+	int		space;
+	int		plus;
+	int		width;
+	int		precision;
+	int		negative;
+	char	specifier;
+}	t_format;
 
 char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);
@@ -75,6 +91,12 @@ int		print_char(char c);
 int		print_str(const char *str);
 int		print_addr(void *ptr);
 int		print_dec(long n, int is_signed);
+int		ft_numlen(unsigned long n, int base);
+
+int		process_number(unsigned long n, const char *base, t_format *fmt);
+int		process_string(const char *str, t_format *fmt);
+int		process_format(t_format *fmt, va_list args);
+void	calculate_padding(t_format *fmt, va_list args);
 
 int		ft_lstsize(t_list *lst);
 t_list	*ft_lstnew(void *content);

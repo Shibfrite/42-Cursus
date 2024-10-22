@@ -1,112 +1,88 @@
-#include <stdio.h>
+#include"ft_printf.h" // Include your ft_printf header
+
+#include "ft_printf.h"
 #include <limits.h>
-#include "ft_printf.h" // Include your ft_printf header
+#include <stdio.h>
 
-int main(void) {
-    char *null_str = NULL;
-    void *ptr = (void *)0x12345678;
+int main(void)
+{
+    int ret;
 
-    // Test characters
-    printf("return ft:%d\n", ft_printf("output: %c\n", 'a'));
-    printf("return :%d\n", printf("output: %c\n", 'a'));
-    printf("\n");
+	// Basic tests
+    ft_printf("-------- Basic Tests --------\n");
+    ret = ft_printf("Hello, world!\n");
+    ft_printf("Return value: %d\n\n", ret);
 
-    printf("return ft:%d\n", ft_printf("output: %c\n", '\0'));
-    printf("return :%d\n", printf("output: %c\n", '\0'));
-    printf("\n");
+    // Character tests
+    ft_printf("-------- Character Tests --------\n");
+    ft_printf("Character: %c\n", 'A');
+    ft_printf("Character: %c\n", 0);
+    ft_printf("Character: %5c\n", 'B');
+    ft_printf("Character: %-5c\n", 'C');
 
-    // Test strings
-    printf("return ft:%d\n", ft_printf("output: %s\n", "Hello, world!"));
-    printf("return :%d\n", printf("output: %s\n", "Hello, world!"));
-    printf("\n");
+    // String tests
+    ft_printf("\n-------- String Tests --------\n");
+    ft_printf("String: %s\n", "Hello");
+    ft_printf("String: %1s\n", "Hello");
+    ft_printf("String: %-10s\n", "Left");
+    ft_printf("String: %.3s\n", "Truncate");
+    ft_printf("String: %10.5s\n", "Precision");
+    ft_printf("Null string: %s\n", NULL);
 
-    printf("return ft:%d\n", ft_printf("output: %s\n", ""));
-    printf("return :%d\n", printf("output: %s\n", ""));
-    printf("\n");
+    // Integer tests
+    ft_printf("\n-------- Integer Tests --------\n");
+    ft_printf("Integer: %i\n", 42);
+    ft_printf("Integer: %d\n", -42);
+    ft_printf("Integer: %5d\n", 42);
+    ft_printf("Integer: %05d\n", 42);
+    ft_printf("Integer: %-5d\n", 42);
+    ft_printf("Integer: %+d\n", 42);
+    ft_printf("Integer: % d\n", 42);
+    ft_printf("Long: %ld\n", LONG_MAX);
+    ft_printf("Long: %ld\n", LONG_MIN);
 
-    printf("return ft:%d\n", ft_printf("output: %s\n", null_str));
-    printf("return :%d\n", printf("output: %s\n", null_str));
-    printf("\n");
+    // Unsigned integer tests
+    ft_printf("\n-------- Unsigned Integer Tests --------\n");
+    ft_printf("Unsigned: %u\n", 42);
+    ft_printf("Unsigned: %u\n", -42);
+    ft_printf("Unsigned Long: %lu\n", ULONG_MAX);
 
-    // Test integers
-    printf("return ft:%d\n", ft_printf("output: %d\n", 42));
-    printf("return :%d\n", printf("output: %d\n", 42));
-    printf("\n");
+    // Hexadecimal tests
+    ft_printf("\n-------- Hexadecimal Tests --------\n");
+    ft_printf("Hex (lowercase): %x\n", 255);
+    ft_printf("Hex (uppercase): %X\n", 255);
+    ft_printf("Hex with #: %#x\n", 255);
+    ft_printf("Hex with 0: %0#8x\n", 255);
 
-    printf("return ft:%d\n", ft_printf("output: %d\n", -42));
-    printf("return :%d\n", printf("output: %d\n", -42));
-    printf("\n");
+    // Pointer tests
+    ft_printf("\n-------- Pointer Tests --------\n");
+    int num = 42;
+    ft_printf("Pointer: %p\n", (void*)&num);
+    ft_printf("Null pointer: %p\n", NULL);
 
-    printf("return ft:%d\n", ft_printf("output: %d\n", INT_MAX));
-    printf("return :%d\n", printf("output: %d\n", INT_MAX));
-    printf("\n");
+    // Percentage sign test
+    ft_printf("\n-------- Percentage Sign Test --------\n");
+    ft_printf("Percentage sign: %%\n");
 
-    printf("return ft:%d\n", ft_printf("output: %d\n", INT_MIN));
-    printf("return :%d\n", printf("output: %d\n", INT_MIN));
-    printf("\n");
+    // Mixed format string
+    ft_printf("\n-------- Mixed Format String --------\n");
+    ft_printf("Mixed: %d %s %c %x %p %%\n", 42, "test", 'Z', 255, (void*)&num);
 
-    printf("return ft:%d\n", ft_printf("output: %i\n", 42));
-    printf("return :%d\n", printf("output: %i\n", 42));
-    printf("\n");
+    // Edge cases
+    ft_printf("\n-------- Edge Cases --------\n");
+    ft_printf("Empty format string: ");
+    ret = ft_printf("");
+    ft_printf("\nReturn value: %d\n", ret);
+    ft_printf("Only percentage: ");
+    ret = ft_printf("%");
+    ft_printf("\nReturn value: %d\n", ret);
 
-    // Test unsigned integers
-    printf("return ft:%d\n", ft_printf("output: %u\n", 42));
-    printf("return :%d\n", printf("output: %u\n", 42));
-    printf("\n");
-
-    printf("return ft:%d\n", ft_printf("output: %u\n", UINT_MAX));
-    printf("return :%d\n", printf("output: %u\n", UINT_MAX));
-    printf("\n");
-
-    // Test hexadecimal
-    printf("return ft:%d\n", ft_printf("output: %x\n", 0xabcdef));
-    printf("return :%d\n", printf("output: %x\n", 0xabcdef));
-    printf("\n");
-
-    printf("return ft:%d\n", ft_printf("output: %X\n", 0xABCDEF));
-    printf("return :%d\n", printf("output: %X\n", 0xABCDEF));
-    printf("\n");
-
-    printf("return ft:%d\n", ft_printf("output: %x\n", 0));
-    printf("return :%d\n", printf("output: %x\n", 0));
-    printf("\n");
-
-    // Test pointers
-    printf("return ft:%d\n", ft_printf("output: %p\n", ptr));
-    printf("return :%d\n", printf("output: %p\n", ptr));
-    printf("\n");
-
-    printf("return ft:%d\n", ft_printf("output: %p\n", NULL));
-    printf("return :%d\n", printf("output: %p\n", NULL));
-    printf("\n");
-
-    // Test percent sign
-    printf("return ft:%d\n", ft_printf("output: %%\n"));
-    printf("return :%d\n", printf("output: %%\n"));
-    printf("\n");
-
-    // Test multiple conversions
-    printf("return ft:%d\n", ft_printf("output: %c %s %d %u %x %X %p %%\n", 'A', "test", -42, 42, 0xabcdef, 0xABCDEF, ptr));
-    printf("return :%d\n", printf("output: %c %s %d %u %x %X %p %%\n", 'A', "test", -42, 42, 0xabcdef, 0xABCDEF, ptr));
-    printf("\n");
-
-    // Test with field width (if implemented)
-    printf("return ft:%d\n", ft_printf("output: %5d\n", 42));
-    printf("return :%d\n", printf("output: %5d\n", 42));
-    printf("\n");
-
-    printf("return ft:%d\n", ft_printf("output: %5s\n", "abc"));
-    printf("return :%d\n", printf("output: %5s\n", "abc"));
-    printf("\n");
-
-    // Test with precision (if implemented)
-    printf("return ft:%d\n", ft_printf("output: %.3d\n", 42));
-    printf("return :%d\n", printf("output: %.3d\n", 42));
-    printf("\n");
-
-    printf("return ft:%d\n", ft_printf("output: %.3s\n", "abcdef"));
-    printf("return :%d\n", printf("output: %.3s\n", "abcdef"));
-    printf("\n");
+    // Precision and width combinations
+    ft_printf("\n-------- Precision and Width Combinations --------\n");
+    ft_printf("Integer: %10.5d\n", 123);
+    ft_printf("Integer: %-10.5d\n", 123);
+    ft_printf("String: %10.5s\n", "Hello, world!");
+    ft_printf("Hex: %#10.5x\n", 123);
 
     return 0;
 }
