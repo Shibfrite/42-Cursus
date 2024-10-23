@@ -6,7 +6,7 @@
 /*   By: makurek <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 17:42:04 by makurek           #+#    #+#             */
-/*   Updated: 2024/10/22 17:31:39 by makurek          ###   ########.fr       */
+/*   Updated: 2024/10/23 15:59:48 by makurek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int		ft_numlen(unsigned long long n, int base);
 
 int		process_number(unsigned long n, const char *base, t_format *fmt);
 int		process_string(const char *str, t_format *fmt);
+int		process_char(char c, t_format *fmt);
 int		process_format(t_format *fmt, va_list args);
 void	calculate_padding(t_format *fmt, va_list args);
 

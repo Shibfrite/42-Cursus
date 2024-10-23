@@ -6,7 +6,7 @@
 /*   By: makurek <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 18:23:36 by makurek           #+#    #+#             */
-/*   Updated: 2024/10/22 18:37:12 by makurek          ###   ########.fr       */
+/*   Updated: 2024/10/23 16:00:08 by makurek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ int	process_format(t_format *fmt, va_list args)
     else if (fmt->specifier == 'c')
     {
         c = va_arg(args, int);
-        return process_char((unsigned char)c, fmt);
-    }
+    	return (process_char(c, fmt));
+	}
     else if (fmt->specifier == '%')
     {
         str = "%";
