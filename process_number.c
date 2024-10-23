@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
 /*   process_number.c                                   :+:      :+:    :+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: makurek <marvin@42.fr>					 +#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2024/10/18 17:51:27 by makurek		   #+#	#+#			 */
-/*   Updated: 2024/10/22 17:46:47 by makurek          ###   ########.fr       */
-/*																			*/
+/*                                                    +:+ +:+         +:+     */
+/*   By: makurek <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/23 16:34:49 by makurek           #+#    #+#             */
+/*   Updated: 2024/10/23 21:25:05 by makurek          ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
@@ -75,7 +75,6 @@ static void	apply_flags(char *buffer, unsigned long n, t_format *fmt, int *i)
 {
 	char	pad;
 
-	apply_prefix(buffer, n, fmt, i);
 	if (fmt->zero)
 		pad = '0' ;
 	else
@@ -83,6 +82,7 @@ static void	apply_flags(char *buffer, unsigned long n, t_format *fmt, int *i)
 	if (!fmt->minus)
 		while (fmt->width-- && *i)
 			buffer[--(*i)] = pad;
+	apply_prefix(buffer, n, fmt, i);
 }
 
 int	process_number(unsigned long n, const char *base, t_format *fmt)
@@ -94,5 +94,5 @@ int	process_number(unsigned long n, const char *base, t_format *fmt)
 		return (write(1, "(nil)", 5));
 	i = init_and_convert(buffer, n, base, fmt);
 	apply_flags(buffer, n, fmt, &i);
-	return(write(1, &buffer[i], BUFFER_SIZE - 1 - i));
+	return (write(1, &buffer[i], BUFFER_SIZE - 1 - i));
 }

@@ -1,74 +1,87 @@
 #include <stdio.h>
-#include "ft_printf.h"
+#include "ft_printf.h"  // Include your ft_printf header file
 
 int main()
 {
-    // Character tests
-    ft_printf("Basic char: %c\n", 'A');
-    printf("Basic char: %c\n", 'A');
-    
-    ft_printf("Digit as char: %c\n", '7');
-    printf("Digit as char: %c\n", '7');
-    
-    ft_printf("Special char: %c\n", '!');
-    printf("Special char: %c\n", '!');
-    
-    ft_printf("ASCII range:\n");
-    printf("ASCII range:\n");
-    for (int i = 32; i <= 126; i++) {
-        ft_printf("%c", i);
-        printf("%c", i);
-    }
-    ft_printf("\n");
-    printf("\n");
-    
-    ft_printf("Null char: %c.\n", '\0');
-    printf("Null char: %c.\n", '\0');
-    
-    ft_printf("Multiple chars: %c %c %c\n", 'X', 'Y', 'Z');
-    printf("Multiple chars: %c %c %c\n", 'X', 'Y', 'Z');
+    printf("Test 1:\n");
+    printf("ft_printf: ["); ft_printf("%5%"); printf("]\n");
+    printf("printf:    ["); printf("%5%"); printf("]\n\n");
 
-    // String tests
-    ft_printf("Simple string: %s\n", "Hello, World!");
-    printf("Simple string: %s\n", "Hello, World!");
-    
-    ft_printf("Empty string: %s\n", "");
-    printf("Empty string: %s\n", "");
-    
-    ft_printf("String with spaces: %s\n", "This is a test");
-    printf("String with spaces: %s\n", "This is a test");
-    
-    ft_printf("String with symbols: %s\n", "!@#$%^&*()");
-    printf("String with symbols: %s\n", "!@#$%^&*()");
-    
-    ft_printf("Long string: %s\n", "This is a very long string that goes on and on and on...");
-    printf("Long string: %s\n", "This is a very long string that goes on and on and on...");
-    
-    ft_printf("Multiple strings: %s %s %s\n", "One", "Two", "Three");
-    printf("Multiple strings: %s %s %s\n", "One", "Two", "Three");
-    
-    ft_printf("Null string: %s\n", NULL);
-    printf("Null string: %s\n", NULL);
+    printf("Test 2:\n");
+    printf("ft_printf: ["); ft_printf("%-5%"); printf("]\n");
+    printf("printf:    ["); printf("%-5%"); printf("]\n\n");
 
-    // Mixed tests
-    ft_printf("Mixed: %c %s %c\n", 'A', "Middle", 'Z');
-    printf("Mixed: %c %s %c\n", 'A', "Middle", 'Z');
+    printf("Test 3:\n");
+    printf("ft_printf: ["); ft_printf("%-05%"); printf("]\n");
+    printf("printf:    ["); printf("%-05%"); printf("]\n\n");
 
-    // Edge cases
-    ft_printf("No arguments: %c %s\n");
-    printf("No arguments: %c %s\n");
-    
-    ft_printf("Wrong type for %%c: %c\n", "string");
-    printf("Wrong type for %%c: %c\n", "string");
-    
-    ft_printf("Wrong type for %%s: %s\n", 'c');
-    printf("Wrong type for %%s: %s\n", 'c');
-    
-    ft_printf("%c%c%c%c%c\n", 'H', 'e', 'l', 'l', 'o');
-    printf("%c%c%c%c%c\n", 'H', 'e', 'l', 'l', 'o');
-    
-    ft_printf("%s%s%s\n", "Hello", ", ", "World!");
-    printf("%s%s%s\n", "Hello", ", ", "World!");
+    printf("Test 4:\n");
+    printf("ft_printf: ["); ft_printf("%23s", NULL); printf("]\n");
+    printf("printf:    ["); printf("%23s", NULL); printf("]\n\n");
+
+    printf("Test 5:\n");
+    printf("ft_printf: ["); ft_printf("%32s", NULL); printf("]\n");
+    printf("printf:    ["); printf("%32s", NULL); printf("]\n\n");
+
+    printf("Test 6:\n");
+    printf("ft_printf: ["); ft_printf("%2s", NULL); printf("]\n");
+    printf("printf:    ["); printf("%2s", NULL); printf("]\n\n");
+
+    printf("Test 7:\n");
+    printf("ft_printf: ["); ft_printf("%-32s", NULL); printf("]\n");
+    printf("printf:    ["); printf("%-32s", NULL); printf("]\n\n");
+
+    printf("Test 8:\n");
+    printf("ft_printf: ["); ft_printf("%-16s", NULL); printf("]\n");
+    printf("printf:    ["); printf("%-16s", NULL); printf("]\n\n");
+
+    printf("Test 9:\n");
+    printf("ft_printf: ["); ft_printf("%-3s", NULL); printf("]\n");
+    printf("printf:    ["); printf("%-3s", NULL); printf("]\n\n");
+
+    printf("Test 10:\n");
+    printf("ft_printf: ["); ft_printf("%.03s", NULL); printf("]\n");
+    printf("printf:    ["); printf("%.03s", NULL); printf("]\n\n");
+
+    printf("Test 11:\n");
+    printf("ft_printf: ["); ft_printf("%3.1s", NULL); printf("]\n");
+    printf("printf:    ["); printf("%3.1s", NULL); printf("]\n\n");
+
+    printf("Test 12:\n");
+    printf("ft_printf: ["); ft_printf("%9.1s", NULL); printf("]\n");
+    printf("printf:    ["); printf("%9.1s", NULL); printf("]\n\n");
+
+    printf("Test 13:\n");
+    printf("ft_printf: ["); ft_printf("%-3.1s", NULL); printf("]\n");
+    printf("printf:    ["); printf("%-3.1s", NULL); printf("]\n\n");
+
+    printf("Test 14:\n");
+    printf("ft_printf: ["); ft_printf("%-9.1s", NULL); printf("]\n");
+    printf("printf:    ["); printf("%-9.1s", NULL); printf("]\n\n");
+
+    printf("Test 15:\n");
+    printf("ft_printf: ["); ft_printf("%3.6s", NULL); printf("]\n");
+    printf("printf:    ["); printf("%3.6s", NULL); printf("]\n\n");
+
+    printf("Test 16:\n");
+    printf("ft_printf: ["); ft_printf("%20.6s", NULL); printf("]\n");
+    printf("printf:    ["); printf("%20.6s", NULL); printf("]\n\n");
+
+    printf("Test 17:\n");
+    printf("ft_printf: ["); ft_printf("%-3.8s", NULL); printf("]\n");
+    printf("printf:    ["); printf("%-3.8s", NULL); printf("]\n\n");
+
+    printf("Test 18:\n");
+    printf("ft_printf: ["); ft_printf("%-10.8s", NULL); printf("]\n");
+    printf("printf:    ["); printf("%-10.8s", NULL); printf("]\n\n");
+
+    printf("Test 19:\n");
+    printf("ft_printf: ["); ft_printf("%7i", -14); printf("]\n");
+    printf("printf:    ["); printf("%7i", -14); printf("]\n\n");
+
+    printf("Test 20:\n");
+    printf("ft_printf: ["); ft_printf("%10.5i", -216); printf("]\n");
+    printf("printf:    ["); printf("%10.5i", -216); printf("]\n\n");
 
     return 0;
 }

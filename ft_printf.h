@@ -6,7 +6,7 @@
 /*   By: makurek <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 17:42:04 by makurek           #+#    #+#             */
-/*   Updated: 2024/10/23 15:59:48 by makurek          ###   ########.fr       */
+/*   Updated: 2024/10/23 20:00:10 by makurek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,11 @@ int		process_string(const char *str, t_format *fmt);
 int		process_char(char c, t_format *fmt);
 int		process_format(t_format *fmt, va_list args);
 void	calculate_padding(t_format *fmt, va_list args);
+
+int		handle_signed_number(t_format *fmt, va_list args);
+int		handle_unsigned_number(t_format *fmt, va_list args);
+int		handle_pointer(va_list args);
+int		handle_string(va_list args);
 
 int		ft_lstsize(t_list *lst);
 t_list	*ft_lstnew(void *content);
