@@ -6,7 +6,7 @@
 /*   By: makurek <marvin@42.fr>					 +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2024/10/21 15:41:32 by makurek		   #+#	#+#			 */
-/*   Updated: 2024/10/23 21:25:12 by makurek          ###   ########.fr       */
+/*   Updated: 2024/10/25 19:12:20 by makurek          ###   ########.fr       */
 /*																		*/
 /* ************************************************************************** */
 
@@ -49,5 +49,7 @@ int	handle_string(va_list args)
 	char	*str;
 
 	str = va_arg(args, char *);
+	if (str == NULL)
+			str = "(null)";
 	return (ft_strlen(str));
 }

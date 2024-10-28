@@ -1,87 +1,68 @@
-#include <stdio.h>
-#include "ft_printf.h"  // Include your ft_printf header file
+#include "ft_printf.h"
 
 int main()
 {
-    printf("Test 1:\n");
-    printf("ft_printf: ["); ft_printf("%5%"); printf("]\n");
-    printf("printf:    ["); printf("%5%"); printf("]\n\n");
+printf("%8.5s\n", "aa");
+ft_printf("%8.5s\n", "aa");
+printf("%8.5s\n", "aa");
+ft_printf("%8.5s\n", "aa");
+printf("%.s\n", "aa");
+ft_printf("%.s\n", "aa");
+printf("%.0s\n", "aa");
+ft_printf("%.0s\n", "aa");
+printf("%.1s\n", "aa");
+ft_printf("%.1s\n", "aa");
+printf("%.3s\n", "aa");
+ft_printf("%.3s\n", "aa");
+printf("%3.3s\n", "aa");
+ft_printf("%3.3s\n", "aa");
+printf("%3.s\n", "aa");
+ft_printf("%3.s\n", "aa");
+printf("%3.0s\n", "aa");
+ft_printf("%3.0s\n", "aa");
+printf("%3.1s\n", "aa");
+ft_printf("%3.1s\n", "aa");
+printf("%3.3s\n", "aa");
+ft_printf("%3.3s\n", "aa");
+printf("%4.3s\n", "aa");
+ft_printf("%4.3s\n", "aa");
+printf("%3.3s\n", "aa");
+ft_printf("%3.3s\n", "aa");
+printf("%3.4s\n", "aa");
+ft_printf("%3.4s\n", "aa");
 
-    printf("Test 2:\n");
-    printf("ft_printf: ["); ft_printf("%-5%"); printf("]\n");
-    printf("printf:    ["); printf("%-5%"); printf("]\n\n");
-
-    printf("Test 3:\n");
-    printf("ft_printf: ["); ft_printf("%-05%"); printf("]\n");
-    printf("printf:    ["); printf("%-05%"); printf("]\n\n");
-
-    printf("Test 4:\n");
-    printf("ft_printf: ["); ft_printf("%23s", NULL); printf("]\n");
-    printf("printf:    ["); printf("%23s", NULL); printf("]\n\n");
-
-    printf("Test 5:\n");
-    printf("ft_printf: ["); ft_printf("%32s", NULL); printf("]\n");
-    printf("printf:    ["); printf("%32s", NULL); printf("]\n\n");
-
-    printf("Test 6:\n");
-    printf("ft_printf: ["); ft_printf("%2s", NULL); printf("]\n");
-    printf("printf:    ["); printf("%2s", NULL); printf("]\n\n");
-
-    printf("Test 7:\n");
-    printf("ft_printf: ["); ft_printf("%-32s", NULL); printf("]\n");
-    printf("printf:    ["); printf("%-32s", NULL); printf("]\n\n");
-
-    printf("Test 8:\n");
-    printf("ft_printf: ["); ft_printf("%-16s", NULL); printf("]\n");
-    printf("printf:    ["); printf("%-16s", NULL); printf("]\n\n");
-
-    printf("Test 9:\n");
-    printf("ft_printf: ["); ft_printf("%-3s", NULL); printf("]\n");
-    printf("printf:    ["); printf("%-3s", NULL); printf("]\n\n");
-
-    printf("Test 10:\n");
-    printf("ft_printf: ["); ft_printf("%.03s", NULL); printf("]\n");
-    printf("printf:    ["); printf("%.03s", NULL); printf("]\n\n");
-
-    printf("Test 11:\n");
-    printf("ft_printf: ["); ft_printf("%3.1s", NULL); printf("]\n");
-    printf("printf:    ["); printf("%3.1s", NULL); printf("]\n\n");
-
-    printf("Test 12:\n");
-    printf("ft_printf: ["); ft_printf("%9.1s", NULL); printf("]\n");
-    printf("printf:    ["); printf("%9.1s", NULL); printf("]\n\n");
-
-    printf("Test 13:\n");
-    printf("ft_printf: ["); ft_printf("%-3.1s", NULL); printf("]\n");
-    printf("printf:    ["); printf("%-3.1s", NULL); printf("]\n\n");
-
-    printf("Test 14:\n");
-    printf("ft_printf: ["); ft_printf("%-9.1s", NULL); printf("]\n");
-    printf("printf:    ["); printf("%-9.1s", NULL); printf("]\n\n");
-
-    printf("Test 15:\n");
-    printf("ft_printf: ["); ft_printf("%3.6s", NULL); printf("]\n");
-    printf("printf:    ["); printf("%3.6s", NULL); printf("]\n\n");
-
-    printf("Test 16:\n");
-    printf("ft_printf: ["); ft_printf("%20.6s", NULL); printf("]\n");
-    printf("printf:    ["); printf("%20.6s", NULL); printf("]\n\n");
-
-    printf("Test 17:\n");
-    printf("ft_printf: ["); ft_printf("%-3.8s", NULL); printf("]\n");
-    printf("printf:    ["); printf("%-3.8s", NULL); printf("]\n\n");
-
-    printf("Test 18:\n");
-    printf("ft_printf: ["); ft_printf("%-10.8s", NULL); printf("]\n");
-    printf("printf:    ["); printf("%-10.8s", NULL); printf("]\n\n");
-
-    printf("Test 19:\n");
-    printf("ft_printf: ["); ft_printf("%7i", -14); printf("]\n");
-    printf("printf:    ["); printf("%7i", -14); printf("]\n\n");
-
-    printf("Test 20:\n");
-    printf("ft_printf: ["); ft_printf("%10.5i", -216); printf("]\n");
-    printf("printf:    ["); printf("%10.5i", -216); printf("]\n\n");
-
-    return 0;
-}
+/*
+printf("%08.5i\n", 34);
+ft_printf("%08.5i\n", 34);
+ft_printf("----");
+printf("%010.5i\n", -216);
+ft_printf("%010.5i\n", -216);
+ft_printf("----");
+printf("%08.5i\n", 0);
+ft_printf("%08.5i\n", 0);
+ft_printf("----");
+printf("%08.3i\n", 8375);
+ft_printf("%08.3i\n", 8375);
+ft_printf("----");
+printf("%08.3i\n", -8473);
+ft_printf("%08.3i\n", -8473);
+ft_printf("----");
+printf("%5.0i\n", 0);
+ft_printf("%5.0i\n", 0);
+ft_printf("----");
+printf("%5.i\n", 0);
+ft_printf("%5.i\n", 0);
+ft_printf("----");
+printf("%-5.0i\n", 0);
+ft_printf("%-5.0i\n", 0);
+ft_printf("----");
+printf("%-5.i\n", 0);
+ft_printf("%-5.i\n", 0);
+ft_printf("----");
+printf("%07d\n", -54);
+ft_printf("%07d\n", -54);
+ft_printf("----");
+printf("%08.5d\n", 34);
+ft_printf("%08.5d\n", 34);
+ft_printf("----");
+*/}

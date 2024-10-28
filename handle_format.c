@@ -6,7 +6,7 @@
 /*   By: makurek <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 18:23:36 by makurek           #+#    #+#             */
-/*   Updated: 2024/10/23 21:25:10 by makurek          ###   ########.fr       */
+/*   Updated: 2024/10/25 19:12:18 by makurek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ static int	process_string_or_char(t_format *fmt, va_list args)
 	if (fmt->specifier == 's')
 	{
 		str = va_arg(args, char *);
-		if (str == NULL)
-			str = "(null)";
 		return (process_string(str, fmt));
 	}
 	else if (fmt->specifier == 'c')

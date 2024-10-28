@@ -6,7 +6,7 @@
 /*   By: makurek <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 16:34:49 by makurek           #+#    #+#             */
-/*   Updated: 2024/10/23 21:25:05 by makurek          ###   ########.fr       */
+/*   Updated: 2024/10/28 16:14:40 by makurek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	init_and_convert(char *buffer, long n,
 		buffer[--i] = '0';
 	else
 		convert_number(buffer, un, base, &i);
-	while (fmt->precision > BUFFER_SIZE - 1 - i && i)
+	while (fmt->precision-- && i)
 		buffer[--i] = '0';
 	return (i);
 }
@@ -75,7 +75,7 @@ static void	apply_flags(char *buffer, unsigned long n, t_format *fmt, int *i)
 {
 	char	pad;
 
-	if (fmt->zero)
+	if (fmt->zero && !fmt->precision)
 		pad = '0' ;
 	else
 		pad = ' ';
@@ -87,8 +87,8 @@ static void	apply_flags(char *buffer, unsigned long n, t_format *fmt, int *i)
 
 int	process_number(unsigned long n, const char *base, t_format *fmt)
 {
-	char	buffer[BUFFER_SIZE];
 	int		i;
+	char	buffer[BUFFER_SIZE];
 
 	if (fmt->specifier == 'p' && n == 0)
 		return (write(1, "(nil)", 5));
