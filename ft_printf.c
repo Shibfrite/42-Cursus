@@ -6,7 +6,7 @@
 /*   By: makurek <marvin@42.fr>					 +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2024/10/12 18:56:51 by makurek		   #+#	#+#			 */
-/*   Updated: 2024/10/25 17:17:49 by makurek          ###   ########.fr       */
+/*   Updated: 2024/10/29 17:59:50 by makurek          ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static void	parse_width_precision_specifier(const char **format, t_format *fmt)
 	{
 		(*format)++;
 		fmt->precision = ft_atoi_advance(format);
+		fmt->zero = 0;
 	}
 	if (**format)
 		fmt->specifier = *(*format)++;

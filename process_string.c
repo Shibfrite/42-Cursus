@@ -6,7 +6,7 @@
 /*   By: makurek <marvin@42.fr>					 +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2024/10/21 14:08:12 by makurek		   #+#	#+#			 */
-/*   Updated: 2024/10/28 16:06:33 by makurek          ###   ########.fr       */
+/*   Updated: 2024/10/29 19:15:28 by makurek          ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -34,11 +34,12 @@ int	process_string(const char *str, t_format *fmt)
 	int		i;
 	int		len;
 
-	if (str == NULL)
+	if (!str)
 	{
-		str = "(null)\n";
-		if (fmt->precision != -1 && fmt->precision < 6)
-			str = "\n";
+		if (fmt->precision == -1 || fmt->precision >= 6)
+			str = "(null)";
+		else
+			str = "";
 	}
 	len = ft_strlen(str);
 	if (fmt->precision >= 0 && fmt->precision < len)

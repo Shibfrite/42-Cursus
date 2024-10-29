@@ -6,7 +6,7 @@
 /*   By: makurek <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 16:34:49 by makurek           #+#    #+#             */
-/*   Updated: 2024/10/28 16:14:40 by makurek          ###   ########.fr       */
+/*   Updated: 2024/10/29 17:11:48 by makurek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	init_and_convert(char *buffer, long n,
 		buffer[--i] = '0';
 	else
 		convert_number(buffer, un, base, &i);
-	while (fmt->precision-- && i)
+	while (fmt->precision != -1 && fmt->precision-- && i)
 		buffer[--i] = '0';
 	return (i);
 }
@@ -73,16 +73,13 @@ static void	apply_prefix(char *buffer, unsigned long n, t_format *fmt, int *i)
 
 static void	apply_flags(char *buffer, unsigned long n, t_format *fmt, int *i)
 {
-	char	pad;
-
-	if (fmt->zero && !fmt->precision)
-		pad = '0' ;
-	else
-		pad = ' ';
-	if (!fmt->minus)
+	if (!fmt->minus && fmt->zero && fmt->precision == -1)
 		while (fmt->width-- && *i)
-			buffer[--(*i)] = pad;
+			buffer[--(*i)] = '0';
 	apply_prefix(buffer, n, fmt, i);
+	if (!fmt->minus && !fmt->zero)
+		while (fmt->width-- && *i)
+			buffer[--(*i)] = ' ';
 }
 
 int	process_number(unsigned long n, const char *base, t_format *fmt)
@@ -91,7 +88,7 @@ int	process_number(unsigned long n, const char *base, t_format *fmt)
 	char	buffer[BUFFER_SIZE];
 
 	if (fmt->specifier == 'p' && n == 0)
-		return (write(1, "(nil)", 5));
+		return (process_string("(nil)", fmt));
 	i = init_and_convert(buffer, n, base, fmt);
 	apply_flags(buffer, n, fmt, &i);
 	return (write(1, &buffer[i], BUFFER_SIZE - 1 - i));
