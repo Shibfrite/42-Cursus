@@ -6,7 +6,7 @@
 /*   By: makurek <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 16:34:49 by makurek           #+#    #+#             */
-/*   Updated: 2024/10/29 17:11:48 by makurek          ###   ########.fr       */
+/*   Updated: 2024/10/30 18:16:12 by makurek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ static void
 	int	base_len;
 
 	base_len = ft_strlen(base);
+	if (!n)
+	{
+		buffer[--(*i)] = '0';
+		return ;
+	}
 	while (n && *i)
 	{
 		buffer[--(*i)] = base[n % base_len];
@@ -40,10 +45,9 @@ static int	init_and_convert(char *buffer, long n,
 	if (fmt->minus)
 		while (fmt->width-- && i)
 			buffer[--i] = ' ';
-	if (un == 0 && fmt->precision != 0)
-		buffer[--i] = '0';
-	else
-		convert_number(buffer, un, base, &i);
+	if (!un && !fmt->precision)
+		return (i);
+	convert_number(buffer, un, base, &i);
 	while (fmt->precision != -1 && fmt->precision-- && i)
 		buffer[--i] = '0';
 	return (i);

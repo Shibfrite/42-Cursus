@@ -6,7 +6,7 @@
 /*   By: makurek <marvin@42.fr>					 +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2024/10/12 18:56:51 by makurek		   #+#	#+#			 */
-/*   Updated: 2024/10/29 17:59:50 by makurek          ###   ########.fr       */
+/*   Updated: 2024/10/30 17:57:39 by makurek          ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -36,7 +36,12 @@ static void	parse_width_precision_specifier(const char **format, t_format *fmt)
 		fmt->zero = 0;
 	}
 	if (**format)
-		fmt->specifier = *(*format)++;
+	{
+		if (ft_strchr("iduxXpsc%", **format))
+			fmt->specifier = *(*format)++;
+		else
+			fmt->specifier = 0;
+	}
 }
 
 static void	parse_flags(const char **format, t_format *fmt)
@@ -60,6 +65,22 @@ static void	parse_flags(const char **format, t_format *fmt)
 	parse_width_precision_specifier(format, fmt);
 }
 
+static int	process_format_specifier(const char **format, t_format *fmt,
+			va_list args, int *count)
+{
+	(*format)++;
+	ft_memset(fmt, 0, sizeof(t_format));
+	parse_flags(format, fmt);
+	if (fmt->specifier)
+	{
+		calculate_padding(fmt, args);
+		*count += process_format(fmt, args);
+		return (1);
+	}
+	*count += write(1, "%", 1);
+	return (0);
+}
+
 int	ft_printf(const char *format, ...)
 {
 	va_list		args;
@@ -72,17 +93,12 @@ int	ft_printf(const char *format, ...)
 	{
 		if (*format == '%')
 		{
-			format++;
-			ft_memset(&fmt, 0, sizeof(t_format));
-			parse_flags(&format, &fmt);
-			calculate_padding(&fmt, args);
-			count += process_format(&fmt, args);
+			if (process_format_specifier(&format, &fmt, args, &count))
+				continue ;
 		}
 		else
-		{
 			count += write(1, format, 1);
-			format++;
-		}
+		format++;
 	}
 	va_end(args);
 	return (count);
