@@ -6,7 +6,7 @@
 /*   By: makurek <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 16:34:49 by makurek           #+#    #+#             */
-/*   Updated: 2024/10/30 18:16:12 by makurek          ###   ########.fr       */
+/*   Updated: 2024/10/30 19:54:48 by makurek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ static int	init_and_convert(char *buffer, long n,
 	if (!un && !fmt->precision)
 		return (i);
 	convert_number(buffer, un, base, &i);
+	if (!un && fmt->precision == -3)
+		fmt->precision = 0;
 	while (fmt->precision != -1 && fmt->precision-- && i)
 		buffer[--i] = '0';
 	return (i);

@@ -6,7 +6,7 @@
 /*   By: makurek <marvin@42.fr>					 +#+  +:+	   +#+		*/
 /*												+#+#+#+#+#+   +#+		   */
 /*   Created: 2024/10/12 18:56:51 by makurek		   #+#	#+#			 */
-/*   Updated: 2024/10/30 17:57:39 by makurek          ###   ########.fr       */
+/*   Updated: 2024/10/30 20:08:39 by makurek          ###   ########.fr       */
 /*																			*/
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ static int	process_format_specifier(const char **format, t_format *fmt,
 		return (1);
 	}
 	*count += write(1, "%", 1);
+	if (**format)
+		*count += write(1, *format, 1);
 	return (0);
 }
 

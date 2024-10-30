@@ -6,7 +6,7 @@
 /*   By: makurek <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 18:55:21 by makurek           #+#    #+#             */
-/*   Updated: 2024/10/30 17:43:29 by makurek          ###   ########.fr       */
+/*   Updated: 2024/10/30 20:06:23 by makurek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,16 @@ static int	get_content_length(t_format *fmt, va_list copy_args)
 	return (content_len);
 }
 
-static void	adjust_content_length(t_format *fmt, int *content_len)
+static void	adjust_content_length(t_format *fmt, int *content_len, int is_zero)
 {
-	if (fmt->specifier != 's' && fmt->precision != -1)
+	if (fmt->specifier != 's' && fmt->precision != -1 && !is_zero)
 	{
 		if (fmt->precision > *content_len)
 			fmt->precision -= *content_len;
 		else
 			fmt->precision = 0;
 	}
-	else if (fmt->specifier == 's' && fmt->precision != -1)
+	else if (fmt->specifier == 's' && fmt->precision != -1 && !is_zero)
 	{
 		if (fmt->precision > *content_len && fmt->precision >= 6)
 			fmt->precision = -1;
@@ -57,12 +57,16 @@ static void	adjust_content_length(t_format *fmt, int *content_len)
 void	calculate_padding(t_format *fmt, va_list args)
 {
 	va_list	copy_args;
+	va_list	copy_args2;
 	int		content_len;
 
 	va_copy(copy_args, args);
+	va_copy(copy_args2, args);
 	content_len = get_content_length(fmt, copy_args);
-	adjust_content_length(fmt, &content_len);
-	if (fmt->specifier != 's' && fmt->precision != -1)
+	if ((va_arg(copy_args2, int) == 0) && fmt->precision == 1)
+		fmt->precision = -3;
+	adjust_content_length(fmt, &content_len, fmt->precision == -3);
+	if (fmt->specifier != 's' && (fmt->precision != -1 && fmt->precision != -3))
 		fmt->width -= content_len + fmt->precision;
 	else if (fmt->width > content_len)
 		fmt->width -= content_len;
